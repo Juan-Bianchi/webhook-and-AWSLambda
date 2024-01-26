@@ -1,3 +1,5 @@
+import { dataType } from "./linear.service.impl";
+
 export interface LinearService {
-  reSendMessageToDiscord(data: string, type: string, createdAt: string): Promise<boolean>;
+  reSendMessageToDiscord(data: dataType, type: string, createdAt: string): Promise<boolean>;
 }

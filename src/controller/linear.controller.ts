@@ -22,5 +22,5 @@ linearRouter.post('/', (req: Request, res: Response) => {
   console.log(payload);
   service.reSendMessageToDiscord(data, type, createdAt);
 
-  res.status(200).json(data)
+  res.status(200)
 })
