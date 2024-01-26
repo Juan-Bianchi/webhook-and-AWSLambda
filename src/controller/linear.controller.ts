@@ -16,7 +16,6 @@ linearRouter.get('/', (req: Request, res: Response) => {
 
 linearRouter.post('/', (req: Request, res: Response) => {
   const data = req.body;
-  console.log(req)
   console.log(data);
   res.status(200).json(data)
 })
