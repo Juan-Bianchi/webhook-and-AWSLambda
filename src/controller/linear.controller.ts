@@ -1,6 +1,8 @@
 import { Router, Request, Response } from 'express'
+import { LinearServiceImpl } from '../service/linear.service.impl'
 
 export const linearRouter = Router()
+const service = new LinearServiceImpl();
 
 linearRouter.get('/', (req: Request, res: Response) => {
   res.send(`
@@ -15,7 +17,10 @@ linearRouter.get('/', (req: Request, res: Response) => {
 })
 
 linearRouter.post('/', (req: Request, res: Response) => {
-  const data = req.body;
-  console.log(data);
+  const payload = req.body;
+  const { data, type, createdAt } = payload;
+  console.log(payload);
+  service.reSendMessageToDiscord(data, type, createdAt);
+
   res.status(200).json(data)
 })

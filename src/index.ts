@@ -1,10 +1,20 @@
-import express from 'express'
+import express, { Request, Response } from 'express'
+import { Buffer } from 'buffer';
 import cors from 'cors'
 import { router } from './router';
 
+export interface CustomRequest extends Request {
+  rawBody?: Buffer;
+}
+
 const app = express();
 
-app.use(express.json())
+app.use(express.json({
+  // Save raw body buffer before JSON parsing
+  verify: (req: CustomRequest, res: Response, buf: Buffer) => {
+    req.rawBody = buf;
+  },
+}))
 app.use(express.urlencoded({ extended: false })) // Parse application/x-www-form-urlencoded request bodies
 
 
