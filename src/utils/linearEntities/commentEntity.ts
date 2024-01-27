@@ -4,9 +4,10 @@ import { LinearEntityStrategy } from "./linearEntityStrategy";
 
 export class CommentEntity implements LinearEntityStrategy {
 
-  async reSendMessageToDiscord(action: string, data: CommentData, createdAt: string): Promise<boolean> {
+  async reSendMessageToDiscord(entity: string, action: string, data: CommentData, createdAt: string): Promise<boolean> {
     const url = process.env.DISCORD_WEBHOOK_URL as string;
     const contentObject: CommentContent = {
+      entity: entity,
       body: data.body,
       user: data.user.name,
       issue: data.issue.title,

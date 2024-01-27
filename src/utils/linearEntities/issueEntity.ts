@@ -4,9 +4,10 @@ import { LinearEntityStrategy } from "./linearEntityStrategy";
 
 export class IssueEntity implements LinearEntityStrategy {
 
-  async reSendMessageToDiscord(action: string, data: IssueData, createdAt: string): Promise<boolean> {
+  async reSendMessageToDiscord(entity: string, action: string, data: IssueData, createdAt: string): Promise<boolean> {
     const url = process.env.DISCORD_WEBHOOK_URL as string;
     const contentObject: IssueContent = {
+      entity: entity,
       title: data.title,
       team: data.team.name,
       assignee: data.assignee?.name ? data.assignee.name: 'Not assigned',

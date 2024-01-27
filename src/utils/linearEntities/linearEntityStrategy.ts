@@ -1,5 +1,5 @@
-import { CommentData, DataType, IssueData } from "../types";
+import { CommentData, IssueData } from "../types";
 
 export interface LinearEntityStrategy {
-  reSendMessageToDiscord(action: string, data: IssueData | CommentData, createdAt: string): Promise<boolean>;
+  reSendMessageToDiscord(entity: string, action: string, data: IssueData | CommentData, createdAt: string): Promise<boolean>;
 }

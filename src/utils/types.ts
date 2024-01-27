@@ -23,6 +23,7 @@ export type Team = {
 }
 
 export type IssueContent = {
+  entity: string,
   title: string,
   assignee?: string,
   team: string,
@@ -57,6 +58,7 @@ export type IssueData = {
 }
 
 export type CommentContent = {
+  entity: string,
   body: string,
   user: string,
   issue: string,

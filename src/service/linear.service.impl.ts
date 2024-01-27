@@ -12,7 +12,7 @@ export class LinearServiceImpl implements LinearService {
     if (type == DataType.Issue || type == DataType.Comment) {
       const strategy = type === DataType.Issue? new IssueEntity(): new CommentEntity();
       const linearEntity = new LinearEntity(strategy);
-      hasBeenSent = await linearEntity.reSendToDiscord(action, data, createdAt);
+      hasBeenSent = await linearEntity.reSendToDiscord(type, action, data, createdAt);
     }
     else {
       const url = process.env.DISCORD_WEBHOOK_URL as string;
