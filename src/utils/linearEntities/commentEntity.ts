@@ -13,7 +13,7 @@ export class CommentEntity implements LinearEntityStrategy {
       date: createdAt,
       action: action
     }
-    const content = Object.values(contentObject)
+    const content = Object.entries(contentObject)
       .map(([key, value]) => `${String(key)}:   ${String(value)}`)
       .join(',\n');
     return axios.post(url, {
