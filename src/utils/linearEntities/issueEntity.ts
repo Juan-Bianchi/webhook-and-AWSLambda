@@ -9,7 +9,7 @@ export class IssueEntity implements LinearEntityStrategy {
     const contentObject: IssueContent = {
       title: data.title,
       team: data.team.name,
-      assignee: data.assignee.name,
+      assignee: data.assignee?.name ? data.assignee.name: 'Not assigned',
       action: action,
       state: data.state.name,
       date: createdAt,

@@ -9,9 +9,6 @@ export class LinearServiceImpl implements LinearService {
 
   async reSendMessageToDiscord(action: string, data: IssueData | CommentData, type: DataType, createdAt: string): Promise<boolean> {
     let hasBeenSent: boolean;
-    console.log(type)
-    console.log(DataType.Comment)
-    console.log(DataType.Issue)
     if (type == DataType.Issue || type == DataType.Comment) {
       const strategy = type === DataType.Issue? new IssueEntity(): new CommentEntity();
       const linearEntity = new LinearEntity(strategy);
