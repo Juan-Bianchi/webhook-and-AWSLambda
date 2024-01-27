@@ -1,7 +1,7 @@
 export enum DataType {
-  Issue,
-  Comment,
-  Project
+  Issue = 'Issue',
+  Comment = 'Comment',
+  Project = 'Project'
 }
 
 export type UserType = {
