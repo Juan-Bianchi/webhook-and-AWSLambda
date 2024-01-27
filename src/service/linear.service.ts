@@ -1,5 +1,5 @@
-import { dataType } from "./linear.service.impl";
+import { CommentData, DataType, IssueData } from "../utils/types";
 
 export interface LinearService {
-  reSendMessageToDiscord(data: dataType, type: string, createdAt: string): Promise<boolean>;
+  reSendMessageToDiscord(action: string, data: IssueData | CommentData, type: DataType, createdAt: string): Promise<boolean>;
 }

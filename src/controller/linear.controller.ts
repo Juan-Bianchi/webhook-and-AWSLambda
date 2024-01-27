@@ -1,5 +1,6 @@
 import { Router, Request, Response } from 'express'
 import { LinearServiceImpl } from '../service/linear.service.impl'
+import { middlewareAuth } from '../utils/middlewareAuth';
 
 export const linearRouter = Router()
 const service = new LinearServiceImpl();
@@ -16,11 +17,11 @@ linearRouter.get('/', (req: Request, res: Response) => {
   `)
 })
 
-linearRouter.post('/', (req: Request, res: Response) => {
+linearRouter.post('/',middlewareAuth, (req: Request, res: Response) => {
   const payload = req.body;
-  const { data, type, createdAt } = payload;
+  const { action, data, type, createdAt } = payload;
   console.log(payload);
-  const sentToDiscord = service.reSendMessageToDiscord(data, type, createdAt);
+  const sentToDiscord = service.reSendMessageToDiscord(action, data, type, createdAt);
   if(!sentToDiscord) {
     res.status(403)
   }
