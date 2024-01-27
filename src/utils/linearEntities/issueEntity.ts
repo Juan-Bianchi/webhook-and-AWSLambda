@@ -14,7 +14,9 @@ export class IssueEntity implements LinearEntityStrategy {
       state: data.state.name,
       date: createdAt,
     }
-    const content = Object.values(contentObject).join(',\n');
+    const content = Object.values(contentObject)
+      .map(([key, value]) => `${String(key)}: ${String(value)}`)
+      .join(',\n');
     return axios.post(url, {
         content: content,
       }).then((discordResponse) => {
