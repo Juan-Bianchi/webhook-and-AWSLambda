@@ -15,7 +15,7 @@ export class IssueEntity implements LinearEntityStrategy {
       date: createdAt,
     }
     const content = Object.values(contentObject)
-      .map(([key, value]) => `${String(key)}: ${String(value)}`)
+      .map(([key, value]) => `${String(key)}:   ${String(value)}`)
       .join(',\n');
     return axios.post(url, {
         content: content,
