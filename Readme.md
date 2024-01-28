@@ -13,9 +13,22 @@ Depending on the entity sent in the payload of the Linear webhook request, a per
 
 ## Linear webhooks payload
 
-I will attach some screenshots of two different payload to have a reference in case you work with Linear webhooks in the future (Please, take into account that payload will depend on the entity type modified).
+I will attach some screenshots of issue payload sent by Linear to have a reference in case you work with Linear webhooks in the future (Please, take into account that payload will depend on the entity type modified).
 
-![IssuePayload1](https://github.com/Juan-Bianchi/webhook-and-AWSLambda/assets/104390122/8ee5a752-a33b-4bfe-8ef1-bbced1d470ee)
+![IssueEntity](https://github.com/Juan-Bianchi/webhook-and-AWSLambda/assets/104390122/804485e4-e4c2-46a9-8bc2-e60498e5d384)
+
+![IssueEntity2](https://github.com/Juan-Bianchi/webhook-and-AWSLambda/assets/104390122/674d139f-7fdb-4006-b799-6c145a16af18)
+
+1- action: It describes the action that triggered the webhook. E.g: 'create', 'update', 'remove', etc.
+2- createdAt: It shows date and time when the entity was modified.
+3- asignee: This property will be present only if the Issue has been assigned to a Team member. Only one person can be the asignee of an issue.
+4- state: It gives information about the state of the issue. This object has a property called name that informs the state.
+5- team: It provides details about the work team.
+6- suscribersId: An array that contains IDs of user assigned to help the asignee to finish the Issue.
+7- type: It informs the entity that is being modified.
+
+
+
 
 
 
