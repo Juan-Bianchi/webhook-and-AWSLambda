@@ -15,6 +15,7 @@ Depending on the entity sent in the payload of the Linear webhook request, a per
 
 I will attach some screenshots of two different payload to have a reference in case you work with Linear webhooks in the future (Please, take into account that payload will depend on the entity type modified).
 
+![IssuePayload1](https://github.com/Juan-Bianchi/webhook-and-AWSLambda/assets/104390122/8ee5a752-a33b-4bfe-8ef1-bbced1d470ee)
 
 
 
