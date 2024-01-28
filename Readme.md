@@ -7,13 +7,13 @@ This repository was created to test webhooks generated in Linear. After creating
 Depending on the entity sent in the payload of the Linear webhook request, a personalized message will be created and sent to Discord, displaying it in a chosen channel.
 
 ## Steps
-1. Created an AWS Lambda Function to re-send Linear payload to this backend. Created a public url so Lambda Function can be consumed. 
-2. Created a webhook in Linear. First, I set Lambda Function's url so webhook can send the request and then configured which events would trigger the webhook request.
-3. Created this backend, which is responsible for generating the message that will be sent and shown in Discord. Depending on the entity that is being modified, a personalized message will be generated to show its details.
+1. I created an AWS Lambda Function to re-send Linear payload to this backend. I created a public url so Lambda Function can be consumed. 
+2. I created a webhook in Linear. First, I set Lambda Function's url so webhook can send the request and then configured which events would trigger the webhook request.
+3. I created this backend, which is responsible for generating the message that will be sent and shown in Discord. Depending on the entity that is being modified, a personalized message will be generated to show its details.
 
 ## Linear webhooks payload
 
-I will attach some screenshots of issue payload sent by Linear to have a reference in case you work with Linear webhooks in the future (Please, take into account that payload will depend on the entity type modified).
+I will attach some screenshots of an 'issue' payload sent by Linear to have a reference in case you work with Linear webhooks in the future. Please, notice that payload structure will **depend on the entity type modified** (the object inside 'data' property will differ).
 
 ![IssueEntity](https://github.com/Juan-Bianchi/webhook-and-AWSLambda/assets/104390122/804485e4-e4c2-46a9-8bc2-e60498e5d384)
 
@@ -26,10 +26,3 @@ I will attach some screenshots of issue payload sent by Linear to have a referen
 5. team: It provides details about the work team.
 6. suscribersId: An array that contains IDs of user assigned to help the asignee to finish the Issue.
 7. type: It informs the entity that is being modified.
-
-
-
-
-
-
-
