@@ -7,9 +7,9 @@ This repository was created to test webhooks generated in Linear. After creating
 Depending on the entity sent in the payload of the Linear webhook request, a personalized message will be created and sent to Discord, displaying it in a chosen channel.
 
 ## Steps
-1. I created an AWS Lambda Function to re-send Linear payload to this backend. I created a public url so Lambda Function can be consumed. 
-2. I created a webhook in Linear. First, I set Lambda Function's url so webhook can send the request and then configured which events would trigger the webhook request.
-3. I created this backend, which is responsible for generating the message that will be sent and shown in Discord. Depending on the entity that is being modified, a personalized message will be generated to show its details.
+1. I created an AWS Lambda Function designed to resend Linear payloads to this backend. To enable consumption, I generated a public URL for the Lambda Function. It is crucial to create a URL for the Lambda Function to ensure accessibility.
+2. The next step involved setting up a webhook within Linear. Initially, I configured the webhook to utilize the URL of the Lambda Function, allowing the webhook to send requests. After that, I specified the events that would trigger the webhook request. For a comprehensive guide on creating a webhook in Linear, please refer to the Linear Documentation: [Webhooks Guide](https://developers.linear.app/docs/graphql/webhooks)
+3. Additionally, I implemented this backend, responsible for generating the message that will be sent and shown in Discord. Depending on the entity that is being modified, a personalized message will be generated to show its details.
 
 ## Linear webhooks payload
 
@@ -19,10 +19,10 @@ I will attach some screenshots of an 'issue' payload sent by Linear to have a re
 
 ![IssueEntity2](https://github.com/Juan-Bianchi/webhook-and-AWSLambda/assets/104390122/674d139f-7fdb-4006-b799-6c145a16af18)
 
-1. action: It describes the action that triggered the webhook. E.g: 'create', 'update', 'remove', etc.
-2. createdAt: It shows date and time when the entity was modified.
-3. asignee: This property will be present only if the Issue has been assigned to a Team member. Only one person can be the asignee of an issue.
-4. state: It gives information about the state of the issue. This object has a property called name that informs the state.
-5. team: It provides details about the work team.
-6. suscribersId: An array that contains IDs of user assigned to help the asignee to finish the Issue.
-7. type: It informs the entity that is being modified.
+1. action: Describes the specific action that triggered the webhook. Examples include 'create,' 'update,' 'remove,' etc.
+2. createdAt: Indicates the date and time when the entity was last modified.
+3. asignee: This property is present only if the issue has been assigned to a team member. An issue can only have one assignee.
+4. state: Provides information about the current state of the issue. The 'name' property within this object indicates the current status of the issue.
+5. team: Offers details about the assigned work team.
+6. suscribersId: An array containing the IDs of users assigned to assist the assignee in completing the issue.
+7. type: Specifies the type of entity being modified.
