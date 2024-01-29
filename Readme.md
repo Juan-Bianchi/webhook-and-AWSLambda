@@ -20,7 +20,7 @@ I will attach some screenshots of an 'issue' payload sent by Linear to have a re
 ![IssueEntity2](https://github.com/Juan-Bianchi/webhook-and-AWSLambda/assets/104390122/674d139f-7fdb-4006-b799-6c145a16af18)
 
 1. action: Describes the specific action that triggered the webhook. Examples include 'create,' 'update,' 'remove,' etc.
-2. createdAt: Indicates the date and time when the entity was last modified.
+2. createdAt: Indicates the date and time when the entity was last modified. (The time zone used is UTC).
 3. asignee: This property is present only if the issue has been assigned to a team member. An issue can only have one assignee.
 4. state: Provides information about the current state of the issue. The 'name' property within this object indicates the current status of the issue.
 5. team: Offers details about the assigned work team.
