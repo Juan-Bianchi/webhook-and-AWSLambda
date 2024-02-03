@@ -29,7 +29,8 @@ export type IssueContent = {
   team: string,
   state: string,
   action: string,
-  date: string
+  date: string,
+  labels: Object[]
 }
 
 export type IssueData = {
@@ -50,6 +51,7 @@ export type IssueData = {
   identifier: string,
   url: string,
   assignee: UserType,
+  labels: Object[],
   state: State,
   team: Team,
   subscriberIds: string[],

@@ -14,7 +14,9 @@ export class IssueEntity implements LinearEntityStrategy {
       action: action,
       state: data.state.name,
       date: createdAt,
+      labels: data.labels
     }
+    contentObject.labels.forEach(label => console.log(label))
     const content = Object.entries(contentObject)
       .map(([key, value]) => `${String(key)}:   ${String(value)}`)
       .join(',\n');
