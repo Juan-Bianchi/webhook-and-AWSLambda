@@ -1,14 +1,12 @@
-import axios, { AxiosError } from "axios";
+import axios, { AxiosResponse } from "axios";
 import { LinearService } from "./linear.service";
 import { CommentData, DataType, IssueData } from "../utils/types";
 import { IssueEntity } from "../utils/linearEntities/issueEntity";
 import { LinearEntity } from "../utils/linearEntities/linearEntity";
 import { CommentEntity } from "../utils/linearEntities/commentEntity";
 
-interface CustomError extends AxiosError {
-  response?: {
-    headers: any; // Aquí puedes definir el tipo específico de los headers
-  };
+interface CustomError extends Error {
+  response?: AxiosResponse<unknown, any> | undefined;
 }
 
 export class LinearServiceImpl implements LinearService {
