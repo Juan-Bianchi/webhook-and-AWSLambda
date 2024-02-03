@@ -1,9 +1,15 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { LinearService } from "./linear.service";
 import { CommentData, DataType, IssueData } from "../utils/types";
 import { IssueEntity } from "../utils/linearEntities/issueEntity";
 import { LinearEntity } from "../utils/linearEntities/linearEntity";
 import { CommentEntity } from "../utils/linearEntities/commentEntity";
+
+interface CustomError extends AxiosError {
+  response?: {
+    headers: any; // Aquí puedes definir el tipo específico de los headers
+  };
+}
 
 export class LinearServiceImpl implements LinearService {
 
@@ -22,8 +28,9 @@ export class LinearServiceImpl implements LinearService {
             console.log("Success!");
             return true;
           })
-          .catch((err) => {
+          .catch((err: CustomError) => {
             console.error(`Error sending to Discord: ${err}`);
+            console.log('Encabezados de la Respuesta:', err.response?.headers);
             return false;
           });
     }
