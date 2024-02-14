@@ -113,7 +113,7 @@ linearRouter.get('/oauth/callback', async (req: Request, res: Response) => {
     console.log(access_token)
 
     const linearClient = new LinearClient({
-      apiKey: access_token
+      accessToken: access_token
   })
   
   async function getCurrentUser(): LinearFetch<User> {
