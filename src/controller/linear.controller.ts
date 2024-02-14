@@ -110,6 +110,7 @@ linearRouter.get('/oauth/callback', async (req: Request, res: Response) => {
     /*const apiResponse = await axios.get('https://api.linear.app/me', {
       headers: { Authorization: `Bearer ${access_token}` }
     });*/
+    console.log(access_token)
 
     const linearClient = new LinearClient({
       apiKey: access_token
