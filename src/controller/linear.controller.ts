@@ -120,13 +120,13 @@ linearRouter.get('/oauth/callback', async (req: Request, res: Response) => {
       return linearClient.viewer;
   }
   
-  const currentUser = getCurrentUser();
-  console.log(currentUser)
-  /*
+  //const currentUser = getCurrentUser();
+  //console.log(currentUser)
+  
   async function getMyIssues() {
       const org = await linearClient.organization;
       // console.log(org)
-      //const me = await linearClient.viewer;
+      const me = await linearClient.viewer;
       //const myIssues = await me.assignedIssues();
       const id: string = "3972c82b-1fe6-4a31-a113-d9758969fcd5"
       const team = await linearClient.team(id);
@@ -156,11 +156,12 @@ linearRouter.get('/oauth/callback', async (req: Request, res: Response) => {
           });
       } else {
           console.log(`${me.displayName} has no issues`);
-      }
+          
+      }*/
   }
   
     getMyIssues();
-*/
+
     res.status(200);
 
   } catch (error) {
