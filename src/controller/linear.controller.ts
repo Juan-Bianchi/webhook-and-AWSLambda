@@ -121,12 +121,8 @@ linearRouter.get('/oauth/callback', async (req: Request, res: Response) => {
     async function getMyIssues() {
       try {
         const me = await linearClient.viewer;
-        const id: string = "3972c82b-1fe6-4a31-a113-d9758969fcd5";
-        const team = await linearClient.team(id);
-        console.log(team);
         const teams = await linearClient.teams();
         teams.nodes.forEach(team => console.log(team));
-        const members = await team.members();
       } catch (error) {
         console.error('Error al obtener los problemas:', error);
       }
