@@ -107,9 +107,9 @@ linearRouter.get('/oauth/callback', async (req: Request, res: Response) => {
     const { access_token } = tokenResponse.data;
 
     // Paso 5: Hacer una solicitud a la API de Linear
-    const apiResponse = await axios.get('https://api.linear.app/me', {
+    /*const apiResponse = await axios.get('https://api.linear.app/me', {
       headers: { Authorization: `Bearer ${access_token}` }
-    });
+    });*/
 
     const linearClient = new LinearClient({
       apiKey: access_token
@@ -120,12 +120,13 @@ linearRouter.get('/oauth/callback', async (req: Request, res: Response) => {
   }
   
   const currentUser = getCurrentUser();
+  console.log(currentUser)
   
   async function getMyIssues() {
       const org = await linearClient.organization;
       // console.log(org)
-      const me = await linearClient.viewer;
-      const myIssues = await me.assignedIssues();
+      //const me = await linearClient.viewer;
+      //const myIssues = await me.assignedIssues();
       const id: string = "3972c82b-1fe6-4a31-a113-d9758969fcd5"
       const team = await linearClient.team(id);
       console.log(team)
@@ -148,16 +149,16 @@ linearRouter.get('/oauth/callback', async (req: Request, res: Response) => {
   
       // console.log(state)
   
-      if (myIssues.nodes.length) {
+      /*if (myIssues.nodes.length) {
           myIssues.nodes.map(issue => {
               console.log(`${me.displayName} has issue: ${issue.id}, ${issue.title}`);
           });
       } else {
           console.log(`${me.displayName} has no issues`);
-      }
+      }*/
   }
   
-  getMyIssues();
+    getMyIssues();
 
     res.json(apiResponse.data);
 
