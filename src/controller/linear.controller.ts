@@ -121,7 +121,7 @@ linearRouter.get('/oauth/callback', async (req: Request, res: Response) => {
   
   const currentUser = getCurrentUser();
   console.log(currentUser)
-  
+  /*
   async function getMyIssues() {
       const org = await linearClient.organization;
       // console.log(org)
@@ -155,11 +155,11 @@ linearRouter.get('/oauth/callback', async (req: Request, res: Response) => {
           });
       } else {
           console.log(`${me.displayName} has no issues`);
-      }*/
+      }
   }
   
     getMyIssues();
-
+*/
     res.status(200);
 
   } catch (error) {
