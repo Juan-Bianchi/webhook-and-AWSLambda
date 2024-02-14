@@ -160,7 +160,7 @@ linearRouter.get('/oauth/callback', async (req: Request, res: Response) => {
   
     getMyIssues();
 
-    res.json(apiResponse.data);
+    res.status(200);
 
   } catch (error) {
     console.error('Error:', error);
