@@ -2,10 +2,12 @@ import express, { Request, Response } from 'express'
 import { Buffer } from 'buffer';
 import cors from 'cors'
 import { router } from './router';
+import dotenv from 'dotenv';
 
 export interface CustomRequest extends Request {
   rawBody?: Buffer;
 }
+dotenv.config();
 
 const app = express();
 
@@ -31,5 +33,4 @@ const port = 3030;
 app.listen(port, ()=> {
   console.log(`Server listening on port ${port}`)
 })
-
 
