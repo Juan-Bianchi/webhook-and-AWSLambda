@@ -14,6 +14,8 @@ declare module 'express-session' {
 
 export const linearRouter = Router()
 const service = new LinearServiceImpl();
+let codeChallenge;
+let codeVerifier;
 
 linearRouter.get('/', (req: Request, res: Response) => {
   res.send(`
@@ -88,13 +90,13 @@ linearRouter.post('/projectUpdate', middlewareAuth.bind(null, process.env.PROJEC
 linearRouter.get('/token', async (req: Request, res: Response) => {
   try {
     // Generar un código de verificación aleatorio
-    const codeVerifier = crypto.randomBytes(32).toString('base64')
+    codeVerifier = crypto.randomBytes(32).toString('base64')
       .replace(/=/g, '')
       .replace(/\+/g, '-')
       .replace(/\//g, '_');
 
     // Calcular el código de desafío usando SHA256
-    const codeChallenge = crypto.createHash('sha256').update(codeVerifier).digest('base64')
+    codeChallenge = crypto.createHash('sha256').update(codeVerifier).digest('base64')
       .replace(/=/g, '')
       .replace(/\+/g, '-')
       .replace(/\//g, '_');
