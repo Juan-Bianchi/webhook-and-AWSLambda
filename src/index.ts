@@ -4,9 +4,10 @@ import cors from 'cors'
 import { router } from './router';
 import dotenv from 'dotenv';
 import session from 'express-session';
-import RedisStore from 'connect-redis';
+import Redis from 'ioredis'; // Importar el cliente Redis
+import RedisStore from 'connect-redis'; // Importar RedisStore
 
-const redisClient = require('redis').createClient();
+const redisClient = new Redis(); // Crear una instancia del cliente Redis
 
 export interface CustomRequest extends Request {
   rawBody?: Buffer;
