@@ -3,6 +3,7 @@ import { Buffer } from 'buffer';
 import cors from 'cors'
 import { router } from './router';
 import dotenv from 'dotenv';
+import session from 'express-session';
 
 export interface CustomRequest extends Request {
   rawBody?: Buffer;
@@ -25,6 +26,12 @@ app.use(
     origin: `*`
   })
 )
+
+app.use(session({
+  secret: process.env.CLIENT_SECRET as string,
+  resave: false,
+  saveUninitialized: false
+}));
 
 app.use('/api', router)
 
