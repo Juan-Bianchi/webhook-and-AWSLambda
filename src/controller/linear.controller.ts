@@ -1,7 +1,7 @@
 import { Router, Request, Response } from 'express'
 import { LinearServiceImpl } from '../service/linear.service.impl'
 import { middlewareAuth } from '../utils/middlewareAuth';
-import { LinearClient, LinearFetch, User} from '@linear/sdk'
+import { LinearClient } from '@linear/sdk'
 import axios from 'axios';
 import * as querystring from 'querystring';
 
@@ -80,7 +80,7 @@ linearRouter.post('/projectUpdate', middlewareAuth.bind(null, process.env.PROJEC
 
 linearRouter.get('/token', async (req: Request, res: Response) => {
   try {
-    const authUrl = `https://linear.app/oauth/authorize?response_type=code&client_id=${process.env.CLIENT_ID}&redirect_uri=${process.env.REDIRECT_URI}&scope=${process.env.SCOPE}`;
+    const authUrl = `https://linear.app/oauth/authorize?response_type=code&client_id=${process.env.CLIENT_ID}&redirect_uri=${process.env.REDIRECT_URI}&scope=${process.env.SCOPE}&state=${process.env.STATE}&actor=application`;
     res.redirect(authUrl);
   } catch (error) {
     console.error('Error al generar la URL de autorización:', error);
@@ -96,6 +96,9 @@ linearRouter.get('/oauth/callback', async (req: Request, res: Response) => {
 
     if (!code1) {
       throw new Error('Código de autorización no válido');
+    }
+    if(process.env.STATE !== state) {
+      throw new Error('Estado no valido')
     }
 
     const postData = querystring.stringify({
