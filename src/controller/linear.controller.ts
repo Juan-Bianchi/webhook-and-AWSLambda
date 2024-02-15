@@ -80,7 +80,7 @@ linearRouter.post('/projectUpdate', middlewareAuth.bind(null, process.env.PROJEC
 
 linearRouter.get('/token', async (req: Request, res: Response) => {
   try {
-    const authUrl = `https://linear.app/oauth/authorize?response_type=code&client_id=${process.env.CLIENT_ID}&redirect_uri=${process.env.REDIRECT_URI}&scope=${process.env.SCOPE}&state=${process.env.STATE}&actor=application`;
+    const authUrl = `https://linear.app/oauth/authorize?response_type=code&client_id=${process.env.CLIENT_ID}&redirect_uri=${process.env.REDIRECT_URI}&scope=${process.env.SCOPE}&state=${process.env.STATE}`;
     res.redirect(authUrl);
   } catch (error) {
     console.error('Error al generar la URL de autorización:', error);
