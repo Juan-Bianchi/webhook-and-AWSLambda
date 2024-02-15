@@ -14,8 +14,8 @@ declare module 'express-session' {
 
 export const linearRouter = Router()
 const service = new LinearServiceImpl();
-let codeChallenge;
-let codeVerifier;
+let codeChallenge: string;
+let codeVerifier: string;
 
 linearRouter.get('/', (req: Request, res: Response) => {
   res.send(`
@@ -101,8 +101,6 @@ linearRouter.get('/token', async (req: Request, res: Response) => {
       .replace(/\+/g, '-')
       .replace(/\//g, '_');
 
-    // Almacenar el código de verificación en la sesión del usuario (o en otro almacenamiento seguro)
-    req.session.codeVerifier = codeVerifier;
     const authUrl = `https://linear.app/oauth/authorize?response_type=code&client_id=${process.env.CLIENT_ID}&redirect_uri=${process.env.REDIRECT_URI}&scope=${process.env.SCOPE}&state=${process.env.STATE}&code_challenge=${codeChallenge}&code_challenge_method=S256`;
     res.redirect(authUrl);
   } catch (error) {
@@ -116,7 +114,7 @@ linearRouter.get('/oauth/callback', async (req: Request, res: Response) => {
     console.log('Callback recibido');
     const { code, state } = req.query;
     const code1 = code as string;
-    const codeVerifier = req.session.codeVerifier;
+    const codeVerifier1 = codeVerifier;
 
     if (!code1) {
       throw new Error('Código de autorización no válido');
@@ -131,7 +129,7 @@ linearRouter.get('/oauth/callback', async (req: Request, res: Response) => {
       client_secret: process.env.CLIENT_SECRET,
       redirect_uri: process.env.REDIRECT_URI,
       grant_type: 'authorization_code',
-      code_verifier: codeVerifier
+      code_verifier: codeVerifier1
     });
 
     const tokenResponse = await axios.post('https://api.linear.app/oauth/token', postData, {
