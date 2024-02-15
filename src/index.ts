@@ -4,6 +4,9 @@ import cors from 'cors'
 import { router } from './router';
 import dotenv from 'dotenv';
 import session from 'express-session';
+import RedisStore from 'connect-redis';
+
+const redisClient = require('redis').createClient();
 
 export interface CustomRequest extends Request {
   rawBody?: Buffer;
@@ -28,6 +31,7 @@ app.use(
 )
 
 app.use(session({
+  store: new RedisStore({ client: redisClient }),
   secret: process.env.CLIENT_SECRET as string,
   resave: false,
   saveUninitialized: false
