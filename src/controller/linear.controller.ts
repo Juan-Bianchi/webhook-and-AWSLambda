@@ -4,18 +4,9 @@ import { middlewareAuth } from '../utils/middlewareAuth';
 import { LinearClient } from '@linear/sdk'
 import axios from 'axios';
 import * as querystring from 'querystring';
-import * as crypto from 'crypto';
-
-declare module 'express-session' {
-  interface SessionData {
-    codeVerifier?: string;
-  }
-}
 
 export const linearRouter = Router()
 const service = new LinearServiceImpl();
-let codeChallenge: string;
-let codeVerifier: string;
 
 linearRouter.get('/', (req: Request, res: Response) => {
   res.send(`
@@ -89,19 +80,7 @@ linearRouter.post('/projectUpdate', middlewareAuth.bind(null, process.env.PROJEC
 
 linearRouter.get('/token', async (req: Request, res: Response) => {
   try {
-    // Generar un código de verificación aleatorio
-    codeVerifier = crypto.randomBytes(32).toString('base64')
-      .replace(/=/g, '')
-      .replace(/\+/g, '-')
-      .replace(/\//g, '_');
-
-    // Calcular el código de desafío usando SHA256
-    codeChallenge = crypto.createHash('sha256').update(codeVerifier).digest('base64')
-      .replace(/=/g, '')
-      .replace(/\+/g, '-')
-      .replace(/\//g, '_');
-
-    const authUrl = `https://linear.app/oauth/authorize?response_type=code&client_id=${process.env.CLIENT_ID}&redirect_uri=${process.env.REDIRECT_URI}&scope=${process.env.SCOPE}&state=${process.env.STATE}&code_challenge=${codeChallenge}&code_challenge_method=S256`;
+    const authUrl = `https://linear.app/oauth/authorize?response_type=code&client_id=${process.env.CLIENT_ID}&redirect_uri=${process.env.REDIRECT_URI}&scope=${process.env.SCOPE}&state=${process.env.STATE}`;
     res.redirect(authUrl);
   } catch (error) {
     console.error('Error al generar la URL de autorización:', error);
@@ -114,7 +93,6 @@ linearRouter.get('/oauth/callback', async (req: Request, res: Response) => {
     console.log('Callback recibido');
     const { code, state } = req.query;
     const code1 = code as string;
-    const codeVerifier1 = codeVerifier;
 
     if (!code1) {
       throw new Error('Código de autorización no válido');
@@ -128,8 +106,7 @@ linearRouter.get('/oauth/callback', async (req: Request, res: Response) => {
       client_id: process.env.CLIENT_ID,
       client_secret: process.env.CLIENT_SECRET,
       redirect_uri: process.env.REDIRECT_URI,
-      grant_type: 'authorization_code',
-      code_verifier: codeVerifier1
+      grant_type: 'authorization_code'
     });
 
     const tokenResponse = await axios.post('https://api.linear.app/oauth/token', postData, {
