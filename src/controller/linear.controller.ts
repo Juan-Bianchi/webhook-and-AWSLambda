@@ -24,11 +24,12 @@ linearRouter.post('/', middlewareAuth.bind(null, process.env.WEBHOOK_SECRET), (r
   console.log("\n\n\nIssue webhook\n\n") 
   const payload = req.body;
   const { action, data, type, createdAt } = payload;
+  console.log(req.headers)
   console.log(payload);
-  const sentToDiscord = service.reSendMessageToDiscord(action, data, type, createdAt);
+  /* const sentToDiscord = service.reSendMessageToDiscord(action, data, type, createdAt);
   if(!sentToDiscord) {
     res.status(403)
-  }
+  } */
 
   res.status(200)
 })
@@ -71,6 +72,33 @@ linearRouter.post('/label', middlewareAuth.bind(null, process.env.LABEL_SECRET),
 
 linearRouter.post('/projectUpdate', middlewareAuth.bind(null, process.env.PROJECT_UPDATE), (req: Request, res: Response) => {
   console.log("\n\n\nProject update webhook\n\n") 
+  const payload = req.body;
+  console.log(req.headers)
+  console.log(payload);
+
+  res.status(200)
+})
+
+linearRouter.post('/issue', middlewareAuth.bind(null, process.env.PROJECT_UPDATE), (req: Request, res: Response) => {
+  console.log("\n\n\nIssue webhook\n\n") 
+  const payload = req.body;
+  console.log(req.headers)
+  console.log(payload);
+
+  res.status(200)
+})
+
+linearRouter.post('/issue_attachments', middlewareAuth.bind(null, process.env.PROJECT_UPDATE), (req: Request, res: Response) => {
+  console.log("\n\n\nIssue attachments webhook\n\n") 
+  const payload = req.body;
+  console.log(req.headers)
+  console.log(payload);
+
+  res.status(200)
+})
+
+linearRouter.post('/issue_sla', middlewareAuth.bind(null, process.env.PROJECT_UPDATE), (req: Request, res: Response) => {
+  console.log("\n\n\nIssue sla webhook\n\n") 
   const payload = req.body;
   console.log(req.headers)
   console.log(payload);
