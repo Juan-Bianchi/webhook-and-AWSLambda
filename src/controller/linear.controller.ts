@@ -20,22 +20,25 @@ linearRouter.get('/', (req: Request, res: Response) => {
   `)
 })
 
+/*
+lambda webhook
 linearRouter.post('/', middlewareAuth.bind(null, process.env.WEBHOOK_SECRET), (req: Request, res: Response) => {
   console.log("\n\n\nIssue webhook\n\n") 
   const payload = req.body;
   const { action, data, type, createdAt } = payload;
   console.log(req.headers)
   console.log(payload);
-  /* const sentToDiscord = service.reSendMessageToDiscord(action, data, type, createdAt);
+  const sentToDiscord = service.reSendMessageToDiscord(action, data, type, createdAt);
   if(!sentToDiscord) {
     res.status(403)
-  } */
+  } 
 
   res.status(200)
 })
+*/
 
 linearRouter.post('/cycle', middlewareAuth.bind(null, process.env.CYCLE_SECRET), (req: Request, res: Response) => {
-  console.log("\n\n\nCycle webhook\n\n") 
+  console.log("\n\n\nCycle webhook\n") 
   const payload = req.body;
   console.log(req.headers)
   console.log(payload);
@@ -44,7 +47,7 @@ linearRouter.post('/cycle', middlewareAuth.bind(null, process.env.CYCLE_SECRET),
 })
 
 linearRouter.post('/project', middlewareAuth.bind(null, process.env.PROJECT_SECRET), (req: Request, res: Response) => {
-  console.log("\n\n\nProject webhook\n\n") 
+  console.log("\n\n\nProject webhook\n") 
   const payload = req.body;
   console.log(req.headers)
   console.log(payload);
@@ -53,7 +56,7 @@ linearRouter.post('/project', middlewareAuth.bind(null, process.env.PROJECT_SECR
 })
 
 linearRouter.post('/comment', middlewareAuth.bind(null, process.env.COMMENT_SECRET), (req: Request, res: Response) => {
-  console.log("\n\n\nComment webhook\n\n") 
+  console.log("\n\n\nComment webhook\n") 
   const payload = req.body;
   console.log(req.headers)
   console.log(payload);
@@ -62,7 +65,7 @@ linearRouter.post('/comment', middlewareAuth.bind(null, process.env.COMMENT_SECR
 })
 
 linearRouter.post('/label', middlewareAuth.bind(null, process.env.LABEL_SECRET), (req: Request, res: Response) => {
-  console.log("\n\n\nLabel webhook\n\n") 
+  console.log("\n\n\nLabel webhook\n") 
   const payload = req.body;
   console.log(req.headers)
   console.log(payload);
@@ -71,7 +74,7 @@ linearRouter.post('/label', middlewareAuth.bind(null, process.env.LABEL_SECRET),
 })
 
 linearRouter.post('/projectUpdate', middlewareAuth.bind(null, process.env.PROJECT_UPDATE), (req: Request, res: Response) => {
-  console.log("\n\n\nProject update webhook\n\n") 
+  console.log("\n\n\nProject update webhook\n") 
   const payload = req.body;
   console.log(req.headers)
   console.log(payload);
@@ -80,7 +83,7 @@ linearRouter.post('/projectUpdate', middlewareAuth.bind(null, process.env.PROJEC
 })
 
 linearRouter.post('/issue', middlewareAuth.bind(null, process.env.PROJECT_UPDATE), (req: Request, res: Response) => {
-  console.log("\n\n\nIssue webhook\n\n") 
+  console.log("\n\n\nIssue webhook\n") 
   const payload = req.body;
   console.log(req.headers)
   console.log(payload);
@@ -89,7 +92,7 @@ linearRouter.post('/issue', middlewareAuth.bind(null, process.env.PROJECT_UPDATE
 })
 
 linearRouter.post('/issue_attachments', middlewareAuth.bind(null, process.env.PROJECT_UPDATE), (req: Request, res: Response) => {
-  console.log("\n\n\nIssue attachments webhook\n\n") 
+  console.log("\n\n\nIssue attachments webhook\n") 
   const payload = req.body;
   console.log(req.headers)
   console.log(payload);
@@ -98,7 +101,7 @@ linearRouter.post('/issue_attachments', middlewareAuth.bind(null, process.env.PR
 })
 
 linearRouter.post('/issue_sla', middlewareAuth.bind(null, process.env.PROJECT_UPDATE), (req: Request, res: Response) => {
-  console.log("\n\n\nIssue sla webhook\n\n") 
+  console.log("\n\n\nIssue sla webhook\n") 
   const payload = req.body;
   console.log(req.headers)
   console.log(payload);
